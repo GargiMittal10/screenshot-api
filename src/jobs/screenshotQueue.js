@@ -2,13 +2,8 @@ const { Worker, Queue } = require('bullmq');
 const Redis = require('ioredis');
 const screenshotService = require('../services/screenshotService');
 const prisma = require('../services/prismaClient');
-
-const redisUrl = `redis://default:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`;
-const connection = new Redis(redisUrl, {
-  maxRetriesPerRequest: null,
-  enableReadyCheck: false,
-});
-const queue = new Queue('screenshotQueue', { connection });
+const redisConnection = new Redis(process.env.REDIS_TLS_URL);
+const queue = new Queue('screenshotQueue', { connection: redisConnection });
 
 function initQueue() {
   new Worker('screenshotQueue', async job => {
