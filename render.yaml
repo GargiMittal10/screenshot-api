@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: screenshot-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: bash start.sh
+    envVars:
+      - key: NODE_ENV
+        value: production
