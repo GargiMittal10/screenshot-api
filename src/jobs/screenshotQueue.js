@@ -3,7 +3,10 @@ const Redis = require('ioredis');
 const screenshotService = require('../services/screenshotService');
 const prisma = require('../services/prismaClient');
 
-const redisConnection = new Redis(process.env.REDIS_TLS_URL); // Use TLS URL
+const redisConnection = new Redis(process.env.REDIS_TLS_URL, {
+  maxRetriesPerRequest: null, // ✅ Required by BullMQ
+  enableReadyCheck: false,    // Optional, but usually safe to disable for Upstash
+});
 
 const queue = new Queue('screenshotQueue', { connection: redisConnection });
 
