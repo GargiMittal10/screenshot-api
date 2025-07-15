@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Job {
+  id             String   @id @default(cuid())
+  url            String
+  webhook_url    String
+  status         String
+  screenshot_path String?
+  completed_at   DateTime?
+  created_at     DateTime @default(now())
+  viewport_width  Int?
+  viewport_height Int?
+} 
