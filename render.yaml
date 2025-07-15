@@ -10,9 +10,11 @@ services:
       - key: PORT
         value: 3000
       - key: REDIS_HOST
-        value: localhost
+        value: trusted-cardinal-16699.upstash.io        # your actual Redis host from Upstash
       - key: REDIS_PORT
         value: 6379
+      - key: REDIS_PASSWORD
+        value: AUE7AAIjcDExZjAwZjU5YTlhMTQ0NzczOTJiNjYxMDIxYTg1MzRiMHAxMA   # your real Upstash Redis password
       - key: API_KEY
         value: skimai_key
       - key: DATABASE_URL
