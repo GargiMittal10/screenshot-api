@@ -2,7 +2,9 @@ const { Worker, Queue } = require('bullmq');
 const Redis = require('ioredis');
 const screenshotService = require('../services/screenshotService');
 const prisma = require('../services/prismaClient');
-const redisConnection = new Redis(process.env.REDIS_TLS_URL);
+
+const redisConnection = new Redis(process.env.REDIS_TLS_URL); // Use TLS URL
+
 const queue = new Queue('screenshotQueue', { connection: redisConnection });
 
 function initQueue() {
@@ -19,7 +21,7 @@ function initQueue() {
       },
     });
     await screenshotService.sendWebhook(jobId, result.path);
-  }, { connection });
+  }, { connection: redisConnection });
 }
 
 async function addScreenshotJob(job) {
