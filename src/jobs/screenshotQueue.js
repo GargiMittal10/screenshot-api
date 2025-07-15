@@ -3,7 +3,11 @@ const Redis = require('ioredis');
 const screenshotService = require('../services/screenshotService');
 const prisma = require('../services/prismaClient');
 
-const connection = new Redis(`redis://default:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`);
+const redisUrl = `redis://default:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`;
+const connection = new Redis(redisUrl, {
+  maxRetriesPerRequest: null,
+  enableReadyCheck: false,
+});
 const queue = new Queue('screenshotQueue', { connection });
 
 function initQueue() {
