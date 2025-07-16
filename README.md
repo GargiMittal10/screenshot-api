@@ -1,6 +1,8 @@
 #  Screenshot API – Node.js + BullMQ + Prisma + Redis
 A queue-based RESTful API to capture website screenshots asynchronously using Puppeteer, BullMQ, and Redis. It supports webhook notifications and job status tracking.
 
+---
+
 ##  Features
 
 - Queue-based screenshot processing with BullMQ
@@ -10,6 +12,7 @@ A queue-based RESTful API to capture website screenshots asynchronously using Pu
 - Webhook notification on job completion
 - RESTful API with Express
 
+---
 
 ##  Tech Stack
 
@@ -19,9 +22,11 @@ A queue-based RESTful API to capture website screenshots asynchronously using Pu
 - Puppeteer
 - dotenv, axios, and other essential libraries
 
+---
 
 ##  Project Structure
 
+```
 screenshot-api/
 ├── src/
 │   ├── jobs/
@@ -42,56 +47,56 @@ screenshot-api/
 ├── .env
 ├── package.json
 └── README.md
+```
 
+---
 
 ##  Setup Instructions
 
 ### 1. Clone the Repository
 
-bash
+```bash
 git clone https://github.com/GargiMittal10/screenshot-api.git
 cd screenshot-api
-
+```
 
 ### 2. Install Dependencies
 
-bash
+``` bash
 npm install
-
+```
 
 ### 3. Create `.env` File
 
 Create a `.env` file in the root directory:
 
-env
+```env
 PORT=3000
 API_KEY=skimai_key
 DATABASE_URL="file:./dev.db"
 REDIS_HOST=trusted-cardinal-16699.upstash.io
 REDIS_PORT=6379
 REDIS_PASSWORD=AUE7AAIjcDExZjAwZjU5YTlhMTQ0NzczOTJiNjYxMDIxYTg1MzRiMHAxMA
-
+```
 
 ### 4. Setup Prisma
 
-bash
+```bash
 npx prisma generate
 npx prisma migrate dev --name init
+```
 
-
-## .gitignore 
-- node_modules/
-- .env
-- screenshots/
-
+---
 
 ##  Run Locally
 
-bash
+```bash
 node src/app.js
+```
 
 Server will start at: **http://localhost:3000**
 
+---
 
 ##  API Endpoints
 
@@ -99,13 +104,12 @@ Server will start at: **http://localhost:3000**
 
 **POST** `http://localhost:3000/screenshots`
 **Headers:**
-
+```
 x-api-key: your_api_key
-
+```
 
 **Body (JSON):**
-
-json
+```json
 {
   "url": "https://example.com",
   "webhook_url": "https://webhook.site/your-custom-endpoint",
@@ -113,34 +117,37 @@ json
   "viewport_width": 1200,
   "viewport_height": 800
 }
-
+```
 
 **Response:**
-
-json
+```json
 {
   "job_id": "12345",
   "status": "queued"
 }
+```
 
+---
 
 ### 2. Get Job Status
 
 **GET** `/:job_id/status`
 
 **Example:**
-
+```
 GET http://localhost:3000/screenshots/cmd5ps3tg0001um78mj2jrj1c/status
+```
 
 **Response:**
-
-json
+```json
 {
   "job_id": "12345",
   "status": "completed",
   "screenshot_url": "http://localhost:3000/screenshots/12345.png"
 }
+```
 
+---
 
 ## Example Postman Usage
 
@@ -148,12 +155,14 @@ json
 2. Send a `POST` request to `http://localhost:3000/screenshots` with JSON body.
 3. Poll `/status/:job_id` or set a `webhook_url` to receive the screenshot.
 
+---
 
 ## Example Screeenshots for Reference
 
 ![Postman Request Example](images/example1.png)
 ![Postman Request Example](images/example2.png)
 
+---
 
 ## Notes
 
@@ -161,5 +170,9 @@ json
 - Webhooks are optional but recommended for production.
 - Screenshots are stored in `screenshots/` folder.
 
+---
 
+##  License
+
+MIT © 2025
 
