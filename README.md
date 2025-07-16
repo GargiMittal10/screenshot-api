@@ -49,7 +49,7 @@ screenshot-api/
 ### 1. Clone the Repository
 
 bash
-git clone https://github.com/your-username/screenshot-api.git
+git clone https://github.com/GargiMittal10/screenshot-api.git
 cd screenshot-api
 
 
